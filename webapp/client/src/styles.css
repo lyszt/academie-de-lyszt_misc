@@ -1,0 +1,390 @@
+:root {
+  --ink: #1c1a17;
+  --ink-soft: #5c5449;
+  --parchment: #f6f1e7;
+  --parchment-panel: #fbf8f1;
+  --line: #ded4c2;
+  --accent: #7c1f2e;
+  --ok: #2f6b3d;
+  --warn: #9a6a10;
+  --err: #a12a1e;
+  --sidebar: #211d1a;
+  --sidebar-ink: #e8e0d2;
+  --sidebar-soft: #a99f8c;
+  --mono: "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+  --serif: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--parchment);
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  background: var(--sidebar);
+  color: var(--sidebar-ink);
+  overflow-y: auto;
+  border-right: 1px solid #000;
+}
+
+.brand {
+  padding: 22px 18px 16px;
+  border-bottom: 1px solid #38322c;
+  position: sticky;
+  top: 0;
+  background: var(--sidebar);
+  z-index: 1;
+}
+
+.brand-mark {
+  display: block;
+  font-family: var(--serif);
+  font-size: 22px;
+  letter-spacing: 0.5px;
+}
+
+.brand-sub {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--sidebar-soft);
+  margin-top: 4px;
+}
+
+.tree-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tree-root {
+  padding: 8px 6px 40px;
+}
+
+.tree-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 5px 8px;
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.tree-row:hover {
+  background: #322c26;
+}
+
+.tree-dir {
+  color: var(--sidebar-ink);
+  font-weight: 600;
+}
+
+.tree-file {
+  color: var(--sidebar-soft);
+}
+
+.tree-file.is-active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.tree-caret {
+  width: 12px;
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.tree-icon {
+  width: 16px;
+  text-align: center;
+}
+
+.tree-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tree-lang {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: #4a4038;
+  color: #e8e0d2;
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+
+.tree-file.is-active .tree-lang {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Content */
+.content {
+  overflow-y: auto;
+  padding: 32px 40px 80px;
+}
+
+.empty-state {
+  max-width: 520px;
+  margin: 12vh auto 0;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+.empty-state h1 {
+  font-family: var(--serif);
+  color: var(--ink);
+}
+
+.viewer {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.viewer-head {
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+.viewer-head h2 {
+  font-family: var(--serif);
+  margin: 0;
+  font-size: 26px;
+}
+
+.viewer-path {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.viewer-status,
+.viewer-error {
+  color: var(--ink-soft);
+}
+
+.viewer-error {
+  color: var(--err);
+}
+
+/* Prose (markdown) */
+.prose {
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+  font-family: var(--serif);
+  line-height: 1.25;
+}
+
+.prose code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: #ece4d5;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.prose pre code {
+  display: block;
+  padding: 14px;
+  overflow-x: auto;
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--accent);
+  margin: 0;
+  padding-left: 16px;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.prose img {
+  max-width: 100%;
+}
+
+.prose table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--line);
+  padding: 6px 10px;
+  text-align: left;
+}
+
+.text-view {
+  font-family: var(--mono);
+  font-size: 13px;
+  background: var(--parchment-panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+.pdf-frame {
+  width: 100%;
+  height: 80vh;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+/* Notebook */
+.notebook {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.nb-md {
+  font-size: 15px;
+}
+
+.nb-code {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.nb-output {
+  margin: 0;
+  padding: 12px 14px;
+  background: #f3ede1;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+/* Execute panel */
+.exec {
+  background: var(--parchment-panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+}
+
+.exec-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.exec-run {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.exec-run:hover:not(:disabled) {
+  background: #941f30;
+}
+
+.exec-run:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.exec-meta {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.exec-status {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.exec-ok {
+  color: var(--ok);
+  background: #e2efe2;
+}
+
+.exec-warn {
+  color: var(--warn);
+  background: #f5ead0;
+}
+
+.exec-err {
+  color: var(--err);
+  background: #f5dcd8;
+}
+
+.exec-heading {
+  margin: 14px 0 6px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ink-soft);
+}
+
+.exec-out {
+  margin: 0;
+  padding: 12px 14px;
+  background: #1e1b18;
+  color: #eee6d6;
+  border-radius: 7px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  max-height: 360px;
+}
+
+.exec-stderr {
+  color: #f3b6ab;
+}
+
+.exec-empty {
+  color: var(--ink-soft);
+  font-size: 13px;
+  margin: 12px 0 0;
+}
