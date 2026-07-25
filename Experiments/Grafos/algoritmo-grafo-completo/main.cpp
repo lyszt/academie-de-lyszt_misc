@@ -1,20 +1,34 @@
-#include <stdio.h>
+#include <iostream>
 #include <math.h>
+#include <vector>
 #define NUM_VERTICES 25
+using namespace std;
 
+vector<vector<int>> MATRIZ_ADJ = {
+     {0,1,1,1,1},
+     {1,0,1,1,1},
+     {1,1,0,1,1},
+     {1,1,1,0,1},
+     {1,1,1,1,0}
+};
 
-int* make_vertices(int n_vertices){
-    int vertices = (int)(sqrt(n_vertices));
-    int[vertices][vertices] matriz_adj;
-    for(int i = 0; i < vertices; i++) {
-        for(int j = 0; j < vertices; j++) {
-            matriz_adj[i][j] = {i,j};
+bool verify_completeness(vector<vector<int>> matrix){
+    int size = matrix.size();
+    for(int i = 0; i < size; i++){
+        for(int j = i + 1; j < size; j++) {
+            if(matrix[i][j] == 0){
+                return false;
+            }
         }
     }
-    return matriz_adj;
+    return true;
 }
 
 int main() {
-    int* matriz_adj = make_vertices(NUM_VERTICES);
-    return 0;
+    if(verify_completeness(MATRIZ_ADJ) == true){
+        cout << "It is complete" << endl;;
+        return 0;
+    } 
+    cout << "It is not complete." << endl;
+    return 0; 
 }

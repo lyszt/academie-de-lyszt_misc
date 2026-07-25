@@ -3,6 +3,6 @@
 
 
 compile: 
-	gcc main.cpp -o main
+	g++ main.cpp -o main
 run: compile
-	./main.o
+	./main
