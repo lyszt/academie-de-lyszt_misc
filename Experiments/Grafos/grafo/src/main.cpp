@@ -48,6 +48,36 @@ int main() {
         // 3:
         // ...
         // 5:
+        cout << "\n";
+        cout << "=== Busca em largura e profundidade ===\n";
+
+        Grafo g2(6);
+        g2.insere_aresta(Aresta(0, 1));
+        g2.insere_aresta(Aresta(0, 2));
+        g2.insere_aresta(Aresta(1, 3));
+        g2.insere_aresta(Aresta(2, 4));
+        g2.insere_aresta(Aresta(4, 5));
+        g2.imprime();
+        // Grafo:
+        // 0: 1 2
+        // 1: 0 3
+        // 2: 0 4
+        // 3: 1
+        // 4: 2 5
+        // 5: 4
+
+        cout << "\n";
+        cout << "BFS a partir de 0: ";
+        for (int v : g2.busca_largura(0)) {
+            cout << v << " ";
+        }
+        cout << "\n";
+
+        cout << "DFS a partir de 0: ";
+        for (int v : g2.busca_profundidade(0)) {
+            cout << v << " ";
+        }
+        cout << "\n";
     }
     catch (const exception &e) {
         cerr << "exception: " << e.what() << "\n";

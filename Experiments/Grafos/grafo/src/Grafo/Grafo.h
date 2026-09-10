@@ -25,6 +25,17 @@ public:
 
     void imprime();
 
+    /** Percorre o grafo a partir do vertice origem usando busca em largura
+     *  (BFS), visitando todos os vertices alcancaveis a partir dele.
+     *  Retorna a sequencia de vertices na ordem em que foram visitados. */
+    std::vector<int> busca_largura(int origem);
+
+    /** Percorre o grafo a partir do vertice origem usando busca em
+     *  profundidade (DFS), visitando todos os vertices alcancaveis a partir
+     *  dele. Retorna a sequencia de vertices na ordem em que foram
+     *  visitados. */
+    std::vector<int> busca_profundidade(int origem);
+
     // bool eh_passeio(int seq_verts[], int tam_seq_verts);
     // ou
     // bool eh_passeio(std::vector<int> &seq_verts);

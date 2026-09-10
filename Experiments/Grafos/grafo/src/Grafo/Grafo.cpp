@@ -71,3 +71,30 @@ void Grafo::imprime() {
         cout << "\n";
     }
 }
+
+vector<int> Grafo::busca_largura(int origem) {
+    // TODO: implemente a busca em largura (BFS) aqui.
+    //
+    // Dicas:
+    // - Voce vai precisar marcar quais vertices ja foram visitados (ex:
+    //   std::vector<bool> visitados(num_vertices_, false)).
+    // - Precisa de uma estrutura auxiliar com disciplina "primeiro a
+    //   entrar, primeiro a sair" para decidir a ordem de visita.
+    // - Para descobrir os vizinhos de um vertice v, use matriz_adj_[v][u],
+    //   igual ao que o imprime() ja faz.
+    // - O retorno deve ser a ordem em que os vertices foram visitados.
+
+    throw runtime_error("Grafo::busca_largura: ainda nao implementado");
+}
+
+vector<int> Grafo::busca_profundidade(int origem) {
+    // TODO: implemente a busca em profundidade (DFS) aqui.
+    //
+    // Dicas:
+    // - Mesma ideia da BFS (visitados[] + vizinhos via matriz_adj_), mas
+    //   com uma estrutura auxiliar de disciplina "ultimo a entrar, primeiro
+    //   a sair" -- ou resolva com recursao, que usa a pilha de chamadas do
+    //   proprio programa para isso.
+
+    throw runtime_error("Grafo::busca_profundidade: ainda nao implementado");
+}
