@@ -39,7 +39,7 @@ public:
     // bool eh_passeio(int seq_verts[], int tam_seq_verts);
     // ou
     // bool eh_passeio(std::vector<int> &seq_verts);
-
+    
 private:
     int num_vertices_;
     int num_arestas_;
