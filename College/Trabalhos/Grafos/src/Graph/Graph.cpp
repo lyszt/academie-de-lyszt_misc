@@ -3,47 +3,66 @@
 #include <exception>
 #include <string>
 #include <iostream>
+#include <set>
+#include <stack>
+#include <queue>
+#include <algorithm>
 
-Graph::Graph(int num_vertices) {
-    if (num_vertices <= 0) {
+Graph::Graph(int num_vertices)
+{
+    if (num_vertices <= 0)
+    {
         throw Exception("Error in constructor Graph(int): the number of "
-            "vertices " + std::to_string(num_vertices) + " is invalid!");
+                        "vertices " +
+                        std::to_string(num_vertices) + " is invalid!");
     }
 
     num_vertices_ = num_vertices;
     num_edges_ = 0;
 
     adj_matrix_.resize(num_vertices);
-    for (int i = 0; i < num_vertices; i++) {
+    for (int i = 0; i < num_vertices; i++)
+    {
         adj_matrix_[i].resize(num_vertices, 0);
     }
 }
 
-int Graph::num_vertices() {
+int Graph::num_vertices()
+{
     return num_vertices_;
 }
 
-int Graph::num_edges() {
+int Graph::num_edges()
+{
     return num_edges_;
 }
 
-bool Graph::has_edge(Edge e) {
-    if (adj_matrix_[e.v1][e.v2] != 0) {
+bool Graph::has_edge(Edge e)
+{
+    if (adj_matrix_[e.v1][e.v2] != 0)
+    {
         return true;
     }
     return false;
 }
 
-void Graph::insert_edge(Edge e) {
-    try {
+void Graph::insert_edge(Edge e)
+{
+    try
+    {
         validate_edge(e);
-    } catch (...) {
+    }
+    catch (...)
+    {
         throw Exception("Error in operation "
-            "insere_aresta(Edge): the edge " + e.to_string() + " is "
-            "invalid!", std::current_exception());
+                        "insere_aresta(Edge): the edge " +
+                            e.to_string() + " is "
+                                            "invalid!",
+                        std::current_exception());
     }
 
-    if (!has_edge(e) && (e.v1 != e.v2)) {
+    if (!has_edge(e) && (e.v1 != e.v2))
+    {
         adj_matrix_[e.v1][e.v2] = 1;
         adj_matrix_[e.v2][e.v1] = 1;
 
@@ -51,16 +70,23 @@ void Graph::insert_edge(Edge e) {
     }
 }
 
-void Graph::remove_edge(Edge e) {
-    try {
+void Graph::remove_edge(Edge e)
+{
+    try
+    {
         validate_edge(e);
-    } catch (...) {
+    }
+    catch (...)
+    {
         throw Exception("Error in operation "
-            "remove_aresta(Edge): the edge " + e.to_string() + " is "
-            "invalid!", std::current_exception());
+                        "remove_aresta(Edge): the edge " +
+                            e.to_string() + " is "
+                                            "invalid!",
+                        std::current_exception());
     }
 
-    if (has_edge(e)) {
+    if (has_edge(e))
+    {
         adj_matrix_[e.v1][e.v2] = 0;
         adj_matrix_[e.v2][e.v1] = 0;
 
@@ -68,11 +94,15 @@ void Graph::remove_edge(Edge e) {
     }
 }
 
-void Graph::print() {
-    for (int v = 0; v < num_vertices_; v++) {
+void Graph::print()
+{
+    for (int v = 0; v < num_vertices_; v++)
+    {
         std::cout << v << ":";
-        for (int u = 0; u < num_vertices_; u++) {
-            if (adj_matrix_[v][u] != 0) {
+        for (int u = 0; u < num_vertices_; u++)
+        {
+            if (adj_matrix_[v][u] != 0)
+            {
                 std::cout << " " << u;
             }
         }
@@ -80,25 +110,32 @@ void Graph::print() {
     }
 }
 
-void Graph::validate_vertex(int v) {
-    if ((v < 0) || (v >= num_vertices_)) {
+void Graph::validate_vertex(int v)
+{
+    if ((v < 0) || (v >= num_vertices_))
+    {
         throw Exception("Invalid vertex index: " + std::to_string(v));
     }
 }
 
-void Graph::validate_edge(Edge e) {
+void Graph::validate_edge(Edge e)
+{
     validate_vertex(e.v1);
     validate_vertex(e.v2);
 }
 
-bool Graph::is_walk(std::vector<int> &vertex_sequence) {
-    if (vertex_sequence.size() == 0) {
+bool Graph::is_walk(std::vector<int> &vertex_sequence)
+{
+    if (vertex_sequence.size() == 0)
+    {
         throw Exception("Error in operation eh_passeio(vector<int> &): the"
-            " vertex sequence is empty");
+                        " vertex sequence is empty");
     }
 
-    for (int i = 1; i < ((int) vertex_sequence.size()); i++) {
-        if (adj_matrix_[vertex_sequence[i - 1]][vertex_sequence[i]] == 0) {
+    for (int i = 1; i < ((int)vertex_sequence.size()); i++)
+    {
+        if (adj_matrix_[vertex_sequence[i - 1]][vertex_sequence[i]] == 0)
+        {
             return false;
         }
     }
@@ -106,18 +143,22 @@ bool Graph::is_walk(std::vector<int> &vertex_sequence) {
     return true;
 }
 
-bool Graph::is_path(std::vector<int> &vertex_sequence) {
-    if (vertex_sequence.size() == 0) {
+bool Graph::is_path(std::vector<int> &vertex_sequence)
+{
+    if (vertex_sequence.size() == 0)
+    {
         throw Exception("Error in operation eh_caminho(vector<int> &): the"
-            " vertex sequence is empty");
+                        " vertex sequence is empty");
     }
 
     std::vector<int> visited(num_vertices_);
 
     visited[vertex_sequence[0]] = 1;
-    for (int i = 1; i < ((int) vertex_sequence.size()); i++) {
+    for (int i = 1; i < ((int)vertex_sequence.size()); i++)
+    {
         if ((visited[vertex_sequence[i]] != 0) ||
-                (adj_matrix_[vertex_sequence[i - 1]][vertex_sequence[i]] == 0)) {
+            (adj_matrix_[vertex_sequence[i - 1]][vertex_sequence[i]] == 0))
+        {
             return false;
         }
 
@@ -125,4 +166,70 @@ bool Graph::is_path(std::vector<int> &vertex_sequence) {
     }
 
     return true;
+}
+
+std::vector<int> Graph::breadth_first_search(int origin)
+{
+    std::vector<int> graph;
+    std::set<int> visited;
+    visited.emplace(origin);
+    std::queue<int> to_visit;
+    to_visit.emplace(origin);
+    graph.push_back(origin);
+    while (!to_visit.empty())
+    {
+        int node = to_visit.front();
+        for (int neighbour = 0; neighbour < this->num_vertices_; neighbour++)
+        {
+            int is_edge = this->adj_matrix_[node][neighbour];
+            if (is_edge != 0 && visited.count(neighbour) == 0)
+            {
+                to_visit.push(neighbour);
+                visited.emplace(neighbour);
+                graph.push_back(neighbour);
+            }
+        }
+        to_visit.pop();
+    }
+    return graph;
+}
+
+std::vector<int> Graph::ttl_breadth_first_search(int origin, int ttl)
+{
+    std::vector<int> graph;
+    std::set<int> visited;
+    visited.emplace(origin);
+    std::queue<int> to_visit;
+    to_visit.emplace(origin);
+
+    std::vector<int> ttls(num_vertices_, ttl);
+
+    graph.push_back(origin);
+    while (!to_visit.empty())
+    {
+        int node = to_visit.front();
+        if (ttls[node] == 0)
+        {
+            to_visit.pop();
+        }
+        else
+        {
+            for (int neighbour = 0; neighbour < this->num_vertices_; neighbour++)
+            {
+                int is_edge = this->adj_matrix_[node][neighbour];
+                if (is_edge != 0 && visited.count(neighbour) == 0)
+                {
+                    to_visit.push(neighbour);
+                    visited.emplace(neighbour);
+                    graph.push_back(neighbour);
+                    ttls[neighbour] = ttls[node] - 1;
+                }
+            }
+            to_visit.pop();
+        }
+        ttl--;
+        if (ttl == 0)
+            break;
+    }
+    return graph;
 }

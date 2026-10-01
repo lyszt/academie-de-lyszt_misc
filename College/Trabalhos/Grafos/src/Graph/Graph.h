@@ -7,26 +7,22 @@
 
 class Graph {
 public:
-    /** Builds a simple graph with the given number of vertices and no
-     *  edges */
     Graph(int num_vertices);
 
     int num_vertices();
     int num_edges();
 
     bool has_edge(Edge e);
-
-    /** Inserts an edge into the graph if it does not exist yet and is not
-     *  a loop */
     void insert_edge(Edge e);
-
-    /** Removes an edge from the graph if it exists */
     void remove_edge(Edge e);
 
     void print();
 
     bool is_walk(std::vector<int> &vertex_sequence);
     bool is_path(std::vector<int> &vertex_sequence);
+
+    std::vector<int> breadth_first_search(int origin);
+    std::vector<int> ttl_breadth_first_search(int origin, int ttl);
 
 private:
     int num_vertices_;
@@ -37,4 +33,4 @@ private:
     void validate_edge(Edge e);
 };
 
-#endif /* GRAPH_H */
+#endif 
