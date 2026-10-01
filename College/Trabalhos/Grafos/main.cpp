@@ -69,7 +69,7 @@ public:
 int main()
 {
     Input *input = new Input;
-    Graph *graph;
+    Graph *graph = nullptr;
     try
     {
         std::cin >> input->network_nodes >> input->network_connections;
@@ -79,6 +79,7 @@ int main()
             int a, b;
             std::cin >> a >> b;
             [[maybe_unused]]ConnectionBetween *connections = new ConnectionBetween(a, b, graph);
+            delete connections;
         }
         std::cin >> input->does_not_receive_message_count;
         std::vector<MessageFrom*> messages;
@@ -90,12 +91,11 @@ int main()
         }
         for(auto message : messages) {
             message->Run();
+            delete message;
         }
     }
     catch (const std::exception &e)
     {
-        delete input;
-        delete graph;
         Exception::print(e);
     }
     delete input;
