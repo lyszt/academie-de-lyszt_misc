@@ -78,7 +78,7 @@ int main()
         {
             int a, b;
             std::cin >> a >> b;
-            ConnectionBetween *connections = new ConnectionBetween(a, b, graph);
+            [[maybe_unused]]ConnectionBetween *connections = new ConnectionBetween(a, b, graph);
         }
         std::cin >> input->does_not_receive_message_count;
         std::vector<MessageFrom*> messages;

@@ -227,9 +227,6 @@ std::vector<int> Graph::ttl_breadth_first_search(int origin, int ttl)
             }
             to_visit.pop();
         }
-        ttl--;
-        if (ttl == 0)
-            break;
     }
     return graph;
 }
