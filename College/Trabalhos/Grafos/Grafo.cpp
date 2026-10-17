@@ -1,6 +1,5 @@
-#include "Graph.h"
-#include "../Exceptions/Exception.h"
-#include <exception>
+#include "Grafo.h"
+#include <stdexcept>
 #include <string>
 #include <iostream>
 #include <set>
@@ -12,7 +11,7 @@ Graph::Graph(int num_vertices)
 {
     if (num_vertices <= 0)
     {
-        throw Exception("Error in constructor Graph(int): the number of "
+        throw std::runtime_error("Error in constructor Graph(int): the number of "
                         "vertices " +
                         std::to_string(num_vertices) + " is invalid!");
     }
@@ -48,18 +47,7 @@ bool Graph::has_edge(Edge e)
 
 void Graph::insert_edge(Edge e)
 {
-    try
-    {
-        validate_edge(e);
-    }
-    catch (...)
-    {
-        throw Exception("Error in operation "
-                        "insere_aresta(Edge): the edge " +
-                            e.to_string() + " is "
-                                            "invalid!",
-                        std::current_exception());
-    }
+    validate_edge(e);
 
     if (!has_edge(e) && (e.v1 != e.v2))
     {
@@ -72,18 +60,7 @@ void Graph::insert_edge(Edge e)
 
 void Graph::remove_edge(Edge e)
 {
-    try
-    {
-        validate_edge(e);
-    }
-    catch (...)
-    {
-        throw Exception("Error in operation "
-                        "remove_aresta(Edge): the edge " +
-                            e.to_string() + " is "
-                                            "invalid!",
-                        std::current_exception());
-    }
+    validate_edge(e);
 
     if (has_edge(e))
     {
@@ -114,7 +91,7 @@ void Graph::validate_vertex(int v)
 {
     if ((v < 0) || (v >= num_vertices_))
     {
-        throw Exception("Invalid vertex index: " + std::to_string(v));
+        throw std::runtime_error("Invalid vertex index: " + std::to_string(v));
     }
 }
 
@@ -128,7 +105,7 @@ bool Graph::is_walk(std::vector<int> &vertex_sequence)
 {
     if (vertex_sequence.size() == 0)
     {
-        throw Exception("Error in operation eh_passeio(vector<int> &): the"
+        throw std::runtime_error("Error in operation eh_passeio(vector<int> &): the"
                         " vertex sequence is empty");
     }
 
@@ -147,7 +124,7 @@ bool Graph::is_path(std::vector<int> &vertex_sequence)
 {
     if (vertex_sequence.size() == 0)
     {
-        throw Exception("Error in operation eh_caminho(vector<int> &): the"
+        throw std::runtime_error("Error in operation eh_caminho(vector<int> &): the"
                         " vertex sequence is empty");
     }
 
@@ -194,7 +171,7 @@ std::vector<int> Graph::breadth_first_search(int origin)
     return graph;
 }
 
-std::vector<int> Graph::ttl_breadth_first_search(int origin, int ttl)
+std::vector<int> Graph::nao_recebem_mensagem(int origin, int ttl)
 {
     std::vector<int> graph;
     std::set<int> visited;

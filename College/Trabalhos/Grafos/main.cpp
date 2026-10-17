@@ -1,8 +1,20 @@
-#include "src/Edge/Edge.h"
-#include "src/Graph/Graph.h"
-#include "src/Exceptions/Exception.h"
-#include <string>
+#include "Aresta.h"
+#include "Grafo.h"
 #include <iostream>
+#include <vector>
+#include <exception>
+
+// Eu fiz o codigo no meu sistema de arquivos
+// Em ingles, por isso apesar do arquivo 
+// chamar-se Aresta.h, o nome e Edge e por ai
+// em diante
+// ps: ttl_breadth_first_search foi renomeado para nao_recebem_mensagem
+// para adequar-se às demandas do trabalho
+
+void print_exception(const std::exception &e)
+{
+    std::cerr << "exception: " << e.what() << "\n";
+}
 
 struct Input
 {
@@ -25,9 +37,9 @@ class MessageFrom
 
         void Run() {
             Graph graph_copy = *graph;
-            std::vector<int> messages = 
-            graph_copy.ttl_breadth_first_search(origin, ttl);
-            
+            std::vector<int> messages =
+            graph_copy.nao_recebem_mensagem(origin, ttl);
+
             // Faz um vetor de recebimentos e vai mudando pra true conforme a bfs
             std::vector<bool> received(graph->num_vertices(), false);
             for (int node : messages) {
@@ -96,7 +108,7 @@ int main()
     }
     catch (const std::exception &e)
     {
-        Exception::print(e);
+        print_exception(e);
     }
     delete input;
     delete graph;

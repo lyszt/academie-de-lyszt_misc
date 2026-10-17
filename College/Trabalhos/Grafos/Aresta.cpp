@@ -1,4 +1,4 @@
-#include "Edge.h"
+#include "Aresta.h"
 #include <string>
 
 Edge::Edge(int v1, int v2) : v1(v1), v2(v2) {

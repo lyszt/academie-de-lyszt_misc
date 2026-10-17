@@ -1,8 +1,8 @@
-#ifndef GRAPH_H
+#ifndef GRAFO_H
 
-#define GRAPH_H
+#define GRAFO_H
 
-#include "../Edge/Edge.h"
+#include "Aresta.h"
 #include <vector>
 
 class Graph {
@@ -22,7 +22,7 @@ public:
     bool is_path(std::vector<int> &vertex_sequence);
 
     std::vector<int> breadth_first_search(int origin);
-    std::vector<int> ttl_breadth_first_search(int origin, int ttl);
+    std::vector<int> nao_recebem_mensagem(int origin, int ttl);
 
 private:
     int num_vertices_;

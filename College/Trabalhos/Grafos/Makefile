@@ -2,9 +2,9 @@ CXX = g++
 CXXFLAGS = -pedantic -Wall
 LDLIBS = -lm -lutil
 
-SRCS = main.cpp $(wildcard src/*/*.cpp)
+SRCS = $(wildcard *.cpp)
 
-main: $(SRCS) $(wildcard src/*/*.h)
+main: $(SRCS) $(wildcard *.h)
 	$(CXX) $(CXXFLAGS) $(SRCS) -o $@ $(LDLIBS)
 
 clean:

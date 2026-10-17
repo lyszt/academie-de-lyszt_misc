@@ -1,6 +1,6 @@
-#ifndef EDGE_H
+#ifndef ARESTA_H
 
-#define EDGE_H
+#define ARESTA_H
 
 #include <string>
 
